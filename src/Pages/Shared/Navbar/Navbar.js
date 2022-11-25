@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../../../Assests/Icons/logo.png';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const Navbar = () => {
@@ -40,7 +41,7 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+                <Link className="btn btn-ghost normal-case text-xl"><img src={logo} alt="" /></Link>
             </div>
             <div className="navbar-end hidden lg:flex pr-6">
                 <ul className="menu menu-horizontal p-0">

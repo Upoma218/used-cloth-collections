@@ -33,7 +33,6 @@ const SignUp = () => {
                     .catch(error => console.error(error))
             })
             .catch(error => {
-                console.error(error);
                 setSignUpError(error.message);
             })
     }
@@ -53,8 +52,8 @@ const SignUp = () => {
                 }))
     }
     return (
-        <div className='h-[800px] flex justify-center items-center border  '>
-            <div className='w-96 p-7 rounded-2xl shadow-xl'>
+        <div className='h-[800px] flex justify-center items-center border '>
+            <div className='w-96 p-7 rounded-2xl shadow-xl bg-white'>
                 <h2 className='text-xl text-center'>Sign Up</h2>
                 <form onSubmit={handleSubmit(handleSignUp)}>
                     <div className="form-control w-full min-w-xs">
@@ -81,7 +80,7 @@ const SignUp = () => {
                             className="input input-bordered w-full min-w-xs mb-5" />
                         {errors.password && <p className='text-red-600 my-2'>{errors.password.message}</p>}
                     </div>
-                    <input className='btn btn-accent w-full text-white' value="Sign Up" type="submit" />
+                    <input className='btn btn-secondary w-full text-white' value="Sign Up" type="submit" />
                     {signUpError && <p className='text-red-600 py-3'>{signUpError}</p>}
                 </form>
                 <p className='my-3'>Already have an account? <Link className='text-info' to="/login">Login Now</Link></p>

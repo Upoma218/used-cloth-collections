@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 import useToken from '../../Hooks/useToken';
-// import { FaBeer } from "@react-icons/all-files/fa/FaBeer";
+import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -48,7 +48,7 @@ const Login = () => {
     }
     return (
         <div className='h-[800px] flex justify-center items-center border  '>
-            <div className='w-96 p-7 rounded-2xl shadow-xl'>
+            <div className='w-96 p-7 rounded-2xl shadow-xl bg-white'>
                 <h2 className='text-xl text-center'>Login</h2>
                 <form onSubmit={handleSubmit(handleLogin)}>
                     <div className="form-control w-full min-w-xs">
@@ -61,6 +61,14 @@ const Login = () => {
                         {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
                     </div>
                     <div className="form-control w-full min-w-xs">
+                        <label className="label"> <span className="label-text">User Type</span></label>
+                        <select name='slot' className="select select-bordered">
+                            <option disabled selected>Buyer</option>
+                            <option>Seller</option>
+                            <option>Admin</option>
+                        </select>
+                    </div>
+                    <div className="form-control w-full min-w-xs">
                         <label className="label"> <span className="label-text">Password</span></label>
                         <input type="password"
                             {...register("password", {
@@ -71,14 +79,14 @@ const Login = () => {
                         <label className="label"> <span className="label-text">Forget Password?</span></label>
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                     </div>
-                    <input className='btn btn-accent w-full text-white' value="Login" type="submit" />
+                    <input className='btn btn-secondary w-full text-white' value="Login" type="submit" />
                     <div>
                         {loginError && <p className='text-red-600'>{loginError}</p>}
                     </div>
                 </form>
                 <p className='my-3'>New to Doctors Portal <Link className='text-info' to="/signup">Create new Account</Link></p>
                 <div className="divider">OR</div>
-                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'><span><FcGoogle className=' text-xl mr-3'></FcGoogle></span>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );
