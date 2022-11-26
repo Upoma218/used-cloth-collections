@@ -4,7 +4,7 @@ const Blog = () => {
 
     return (
         <div>
-            <h1 className='text-center text-5xl font-bold p-12 text-fuchsia-500'>Blogs</h1>
+            <h1 className='text-center text-5xl font-bold p-12 '>Blogs</h1>
             <div className='pb-12 pt-12'>
                 <div className=' text-center shadow-xl bg-white rounded-3xl mx-12 py-12 mb-12'>
                     <h1 className='text-sky-500 text-3xl my-18' >1. What are the different ways to manage a state in a react application?</h1>

@@ -32,7 +32,7 @@ const Navbar = () => {
     </React.Fragment>
     return (
         <div className="navbar bg-base-100">
-            <div className="navbar-start px-6">
+            <div className="navbar-start lg:pl-32">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -43,7 +43,7 @@ const Navbar = () => {
                 </div>
                 <Link className="btn btn-ghost normal-case text-xl"><img src={logo} alt="" /></Link>
             </div>
-            <div className="navbar-end hidden lg:flex pr-6">
+            <div className="navbar-end hidden lg:flex lg:pr-32">
                 <ul className="menu menu-horizontal p-0">
                     {menuItems}
                 </ul>
