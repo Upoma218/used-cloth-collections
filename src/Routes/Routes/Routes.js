@@ -4,7 +4,6 @@ import Main from "../../Layouts/Main";
 import Blog from "../../Pages/Blog/Blog";
 import AddProducts from "../../Pages/Dashboard/AddProducts/AddProducts";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
-import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
@@ -14,6 +13,7 @@ import Login from "../../Pages/Login/Login";
 import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
 import SignUp from "../../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 
 export const router = createBrowserRouter([
     {
@@ -61,8 +61,8 @@ export const router = createBrowserRouter([
 
             },
             {
-                path: '/dashboard/allUsers',
-                element:<AllUsers></AllUsers>
+                path: '/dashboard/allBuyers',
+                element:<AllBuyers></AllBuyers>,
 
             },
             {

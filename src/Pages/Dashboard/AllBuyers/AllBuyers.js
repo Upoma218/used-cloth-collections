@@ -1,14 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider';
 
-const AllSellers = email => {
-    
+const AllBuyers = () => {
     const { user } = useContext(AuthContext);
-    const url = 'http://localhost:5000/users/sellers?role=Seller';
+    const url = 'http://localhost:5000/users/buyers?role=Buyer';
 
-    const { data: sellers = [] } = useQuery({
-        queryKey: ['sellers', user?.email],
+    const { data: buyers = [] } = useQuery({
+        queryKey: ['buyers', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
                 headers: {
@@ -22,9 +21,10 @@ const AllSellers = email => {
         }
     })
 
+
     return (
         <div>
-            <h1 className='text-2xl font-bold text-center mb-6'>All Sellers</h1>
+            <h1 className='text-2xl font-bold text-center mb-6'>All Buyers</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -38,11 +38,11 @@ const AllSellers = email => {
                     </thead>
                     <tbody>
                         {
-                            sellers &&
-                            sellers?.map((seller, i) => <tr key={seller._id}>
+                            buyers &&
+                            buyers?.map((buyer, i) => <tr key={buyer._id}>
                                 <th>{i + 1}</th>
-                                <td>{seller.name}</td>
-                                <td>{seller.email}</td>
+                                <td>{buyer.name}</td>
+                                <td>{buyer.email}</td>
                                 <td></td>
                                 <td><button className="btn btn-error btn-xs text-white">Delete</button></td>
                             </tr>)
@@ -54,4 +54,4 @@ const AllSellers = email => {
     );
 };
 
-export default AllSellers;
+export default AllBuyers;
