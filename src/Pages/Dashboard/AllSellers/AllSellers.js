@@ -32,7 +32,9 @@ const AllSellers = email => {
                             <th></th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Admin</th>
+                            <th>Phone</th>
+                            <th>Location</th>
+                            <th>Verification</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -43,7 +45,9 @@ const AllSellers = email => {
                                 <th>{i + 1}</th>
                                 <td>{seller.name}</td>
                                 <td>{seller.email}</td>
-                                <td></td>
+                                <td>{seller.phone}</td>
+                                <td>{seller.location}</td>
+                                <td><button className="btn btn-xs text-white">Verify</button></td>
                                 <td><button className="btn btn-error btn-xs text-white">Delete</button></td>
                             </tr>)
                         }

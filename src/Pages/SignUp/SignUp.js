@@ -27,8 +27,8 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        saveUser(data.name, data.email, data.role)
-                        console.log(data.name, data.email, data.role)
+                        saveUser(data.name, data.email, data.role, data.phone, data.location)
+                        // console.log(data.name, data.email, data.role)
                     })
 
                     .catch(error => console.error(error))
@@ -38,8 +38,8 @@ const SignUp = () => {
             })
     }
 
-    const saveUser = (name, email, role) => {
-        const user = { name, email, role };
+    const saveUser = (name, email, role, phone, location) => {
+        const user = { name, email, role, phone, location };
         console.log(user)
         fetch('http://localhost:5000/users', {
             method: 'POST',
@@ -64,6 +64,20 @@ const SignUp = () => {
                             required: "Name is Required"
                         })} className="input input-bordered w-full min-w-xs" />
                         {errors.name && <p className='text-red-600 py-3'>{errors.name.message}</p>}
+                    </div>
+                    <div className="form-control w-full min-w-xs">
+                        <label className="label"> <span className="label-text">Phone Number</span></label>
+                        <input type="text" {...register("phone", {
+                            required: "Phone number is Required"
+                        })} className="input input-bordered w-full min-w-xs" />
+                        {errors.phone && <p className='text-red-600 py-3'>{errors.phone.message}</p>}
+                    </div>
+                    <div className="form-control w-full min-w-xs">
+                        <label className="label"> <span className="label-text">Location</span></label>
+                        <input type="text" {...register("location", {
+                            required: "Location is Required"
+                        })} className="input input-bordered w-full min-w-xs" />
+                        {errors.location && <p className='text-red-600 py-3'>{errors.location.message}</p>}
                     </div>
                     
                     <div className="form-control w-full min-w-xs">
