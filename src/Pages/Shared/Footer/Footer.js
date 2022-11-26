@@ -7,9 +7,10 @@ const Footer = () => {
         <footer className="footer footer-center p-10 bg-base-content text-white">
             <div>
                 <img src={logo} alt="" className='w-16'/>
-                <p className="font-bold">
-                    Used Cloth Collections <br />Selling Used Cloths for Men, Women & Kids
-                </p>
+                <p className="font-bold text-xl">
+                    Used Cloth Collections
+                </p >
+                <p className="font-semibold">Selling Used Cloths for Men, Women & Kids</p>
                 <p>Copyright © 2022 - All right reserved By UCC</p>
             </div>
             <div>
