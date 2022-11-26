@@ -61,14 +61,6 @@ const Login = () => {
                         {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
                     </div>
                     <div className="form-control w-full min-w-xs">
-                        <label className="label"> <span className="label-text">User Type</span></label>
-                        <select name='slot' className="select select-bordered">
-                            <option disabled selected>Buyer</option>
-                            <option>Seller</option>
-                            <option>Admin</option>
-                        </select>
-                    </div>
-                    <div className="form-control w-full min-w-xs">
                         <label className="label"> <span className="label-text">Password</span></label>
                         <input type="password"
                             {...register("password", {

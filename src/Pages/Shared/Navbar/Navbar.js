@@ -41,13 +41,16 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link className="btn btn-ghost normal-case text-xl"><img src={logo} alt="" /></Link>
+                <Link to='/' className="btn btn-ghost normal-case text-xl"><img src={logo} alt="" /></Link>
             </div>
-            <div className="navbar-end hidden lg:flex lg:pr-32">
+            <div className=" hidden lg:flex lg:pr-32">
                 <ul className="menu menu-horizontal p-0">
                     {menuItems}
                 </ul>
             </div>
+            <label htmlFor="dashboard-drawer" tabIndex={2} className="navbar-end mr-5 btn btn-ghost lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            </label>
         </div>
     );
 };

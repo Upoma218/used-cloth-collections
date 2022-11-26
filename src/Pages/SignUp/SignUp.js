@@ -17,7 +17,7 @@ const SignUp = () => {
     }
     const handleSignUp = data => {
         setSignUpError('');
-        createUser(data.email, data.password)
+        createUser(data.email, data.password )
             .then(result => {
                 const user = result.user;
                 console.log(user)
@@ -27,7 +27,8 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        saveUser(data.name, data.email)
+                        saveUser(data.name, data.email, data.role)
+                        console.log(data.name, data.email, data.role)
                     })
 
                     .catch(error => console.error(error))
@@ -37,9 +38,10 @@ const SignUp = () => {
             })
     }
 
-    const saveUser = (name, email) => {
-        const user = { name, email };
-        fetch('http://localhost:3000/users', {
+    const saveUser = (name, email, role) => {
+        const user = { name, email, role };
+        console.log(user)
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -62,6 +64,16 @@ const SignUp = () => {
                             required: "Name is Required"
                         })} className="input input-bordered w-full min-w-xs" />
                         {errors.name && <p className='text-red-600 py-3'>{errors.name.message}</p>}
+                    </div>
+                    
+                    <div className="form-control w-full min-w-xs">
+                        <label className="label"> <span className="label-text">User Type</span></label>
+                        <select name='slot' className="select select-bordered"{...register("role", {
+                            required: "Select user type is Required"
+                        })}>
+                            <option selected>Buyer</option>
+                            <option>Seller</option>
+                        </select>
                     </div>
                     <div className="form-control w-full min-w-xs">
                         <label className="label"> <span className="label-text">Email</span></label>
