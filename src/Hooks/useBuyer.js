@@ -6,7 +6,7 @@ const useBuyer = email => {
 
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/users/buyer/${email}`)
+            fetch(`http://localhost:5000/users/Buyers/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setIsBuyer(data.isBuyer);

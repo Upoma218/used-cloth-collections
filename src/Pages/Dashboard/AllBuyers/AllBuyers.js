@@ -1,12 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider';
+import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
+import Loading from '../../Shared/Loading/Loading';
 
 const AllBuyers = () => {
-    const { user } = useContext(AuthContext);
-    const url = 'http://localhost:5000/users/buyers?role=Buyer';
 
-    const { data: buyers = [] } = useQuery({
+    const [deletingBuyer, setDeletingBuyer] = useState(null);
+    const closeModal = () => {
+        setDeletingBuyer(null)
+    }
+    const { user } = useContext(AuthContext);
+    const url = 'http://localhost:5000/buyerUser';
+
+    const { data: buyers = [], isLoading, refetch } = useQuery({
         queryKey: ['buyers', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
@@ -20,6 +28,27 @@ const AllBuyers = () => {
 
         }
     })
+
+    const handleDeleteBuyer = seller => {
+        fetch(`http://localhost:5000/users/${seller._id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch();
+                    toast.success(`Buyer ${seller.name} deleted successfully`)
+                }
+                console.log(data)
+            })
+    }
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
 
     return (
@@ -39,19 +68,29 @@ const AllBuyers = () => {
                     </thead>
                     <tbody>
                         {
-                            buyers &&
+                            buyers?.length &&
                             buyers?.map((buyer, i) => <tr key={buyer._id}>
                                 <th>{i + 1}</th>
                                 <td>{buyer.name}</td>
                                 <td>{buyer.email}</td>
                                 <td>{buyer.phone}</td>
                                 <td>{buyer.location}</td>
-                                <td><button className="btn btn-error btn-xs text-white">Delete</button></td>
+                                <td><label  htmlFor="confirmation-modal" onClick={() => setDeletingBuyer(buyer)} className="btn btn-error btn-xs text-white">Delete</label></td>
                             </tr>)
                         }
                     </tbody>
                 </table>
             </div>
+            {
+                deletingBuyer && <ConfirmationModal
+                    title={`Are you sure about deleting this Seller?`}
+                    message={`If you delete once, ${deletingBuyer.name} will be permanently deleted!`}
+                    closeModal={closeModal}
+                    successAction={handleDeleteBuyer}
+                    modalData={deletingBuyer}
+                    successButtonName="Delete">
+                </ConfirmationModal>
+            }
         </div>
     );
 };

@@ -14,6 +14,9 @@ import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
 import SignUp from "../../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
+import Dashboard from "../../Pages/Dashboard/Dashboard";
+import Categories from "../../Pages/Home/Categories/Categories";
+import Category from "../../Pages/Home/Categories/Category";
 
 export const router = createBrowserRouter([
     {
@@ -39,6 +42,11 @@ export const router = createBrowserRouter([
                 element: <About></About>
             },
             {
+                path: '/categories/:id',
+                element: <Category></Category>,
+                loader: ({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
+            },
+            {
                 path: '/blog',
                 element: <Blog></Blog>
             },
@@ -51,17 +59,22 @@ export const router = createBrowserRouter([
         errorElement: <DisplayError></DisplayError>,
         children: [
             {
+                path: '/dashboard',
+                element:<Dashboard></Dashboard>
+
+            },
+            {
                 path: '/dashboard/myOrders',
                 element:<MyOrders></MyOrders>
 
             },
             {
-                path: '/dashboard/allSellers',
+                path: '/dashboard/users/Sellers',
                 element:<AllSellers></AllSellers>
 
             },
             {
-                path: '/dashboard/allBuyers',
+                path: '/dashboard/users/Buyers',
                 element:<AllBuyers></AllBuyers>,
 
             },

@@ -82,7 +82,7 @@ const SignUp = () => {
                     
                     <div className="form-control w-full min-w-xs">
                         <label className="label"> <span className="label-text">User Type</span></label>
-                        <select name='slot' className="select select-bordered"{...register("role", {
+                        <select name='role' className="select select-bordered"{...register("role", {
                             required: "Select user type is Required"
                         })}>
                             <option selected>Buyer</option>
