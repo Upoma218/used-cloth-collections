@@ -34,7 +34,8 @@ const AllSellers = email => {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
-            }
+            },
+            body: JSON.stringify()
         })
             .then(res => res.json())
             .then(data => {

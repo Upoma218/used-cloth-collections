@@ -72,7 +72,7 @@ const AddProducts = () => {
             })
     }
 
-    if(navigation.state === 'looking'){
+    if(navigation.state === 'loading'){
         <Loading></Loading>
     }
 

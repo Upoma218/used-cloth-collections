@@ -1,6 +1,24 @@
-import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Context/AuthProvider';
 
 const MyOrders = () => {
+    const { user } = useContext(AuthContext);
+    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+
+    const { data: bookings = [] } = useQuery({
+        queryKey: ['bookings', user?.email],
+        queryFn: async () => {
+            const res = await fetch(url, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
+            const data = await res.json();
+            return data;
+        }
+    })
     return (
         <div>
             <h1 className='text-2xl font-bold text-center mb-6'>My Orders</h1>
@@ -8,42 +26,42 @@ const MyOrders = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th>
-                            </th>
-                            <th>Name</th>
+                            <th></th>
                             <th>Product Name</th>
-                            <th>Price</th>
+                            <th>Original Price</th>
+                            <th>Resale Price</th>
                             <th>Payment</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* <!-- row 1 --> */}
-                        <tr>
-                            <th>
-                            </th>
-                            <td>
-                                <div className="flex items-center space-x-3">
+                    {
+                            bookings?.length &&
+                            bookings?.map((booking, i) => <tr key={booking._id}>
+                                <th>{i + 1}</th>
+                                <td><div className="flex items-center space-x-3">
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
-                                            <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+                                            <img src={booking.image} alt="Avatar Tailwind CSS Component" />
                                         </div>
                                     </div>
                                     <div>
-                                        <div className="font-bold">Hart Hagerty</div>
-                                        <div className="text-sm opacity-50">United States</div>
+                                        <div className="font-bold">{booking.name}</div>
+                                        <div className="text-sm opacity-50">{booking.email}</div>
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                Zemlak, Daniel and Leannon
-                                <br />
-                                <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-                            </td>
-                            <td>Purple</td>
-                            <th>
-                                <button className="btn btn-xs">Pay Bill</button>
-                            </th>
-                        </tr>
+                                </div></td>
+                                <td>{booking.originalPrice}</td>
+                                <td>{booking.resalePrice}</td>
+                                <td>
+                                    {
+                                        booking.originalPrice && !booking.paid &&
+                                        <Link to={`/dashboard/payment/${booking._id}`}><button className='btn btn-xs text-white'>Pay Bill</button></Link>
+                                    }
+                                    {
+                                        booking.originalPrice && booking.paid && <span className='text-green-800'>Paid</span>
+                                    }
+                                </td>
+                            </tr>)
+                        }
                     </tbody>
                 </table>
             </div>

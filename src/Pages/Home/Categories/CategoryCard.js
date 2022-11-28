@@ -1,37 +1,40 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import verified from '../../../Assests/Icons/verified.png';
+import BookingModal from '../../Shared/BookingModal/BookingModal';
 import Loading from '../../Shared/Loading/Loading';
 
 const CategoryCard = ({ product }) => {
-    const { email, title, image, details, timesOfUse, quality, originalPrice, resalePrice, postedDate, sellersName, phone, location } = product;
+    const [bookings, setBookings] = useState(null);
+    const { email, title, image, details, timesOfUse, quality, originalPrice, resalePrice, postedDate, sellersName, phone, location} = product;
+    console.log(bookings)
     // console.log(email)
 
-    const { data: dbUserNew = [], refetch, isLoading } = useQuery({
+    const { data: dbUserNew = [], isLoading, refetch } = useQuery({
         queryKey: ['userDB', email],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/userEmail?email=${email}`)
             const data = await res.json()
-            refetch()
             return data;
         }
     })
+
+    
     // console.log(dbUserNew[0]);
 
-    const handleReport = product => {
-        fetch(`http://localhost:5000/reportedProducts/${product._id}`, {
+    const handleReport = id => {
+        fetch(`http://localhost:5000/products/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
-            }.
+            }
         })
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
                     console.log(data)
                     toast.success(' Product Reported Successfully');
-                    refetch();
                 }
             })
     }
@@ -59,17 +62,29 @@ const CategoryCard = ({ product }) => {
                 </span></p>
                 <p className='font-bold '>Contact No : <span className='font-normal'>{phone}</span></p>
                 <p className='font-bold '>Location : <span className='font-normal'>{location}</span></p>
-                <div className="card-actions flex">
-                    {
-                        dbUserNew[0]?.verification === 'verified' &&
-                        <button className="btn btn-sm glass mt-5">Book Now</button>
-                    }
-                {
-                    product && 
+                <div className='mt-5'>
+                    <div className="card-actions">
+                        {
+                            dbUserNew[0]?.verification === 'verified' &&
+                            <label
+                                className="btn glass btn-sm"
+                                onClick={() => setBookings(product)}
+                                htmlFor="booking-modal" >
+                                BOOK NOW
+                            </label>
+                        }
+
+                    </div>
                     <button onClick={() => handleReport(product._id)} className="btn btn-sm glass mt-5">Report</button>
-                }
                 </div>
             </div>
+            {
+                bookings &&
+                <BookingModal
+                    bookings={bookings} setBookings={setBookings} refetch={refetch} product={product}
+                >
+                </BookingModal>
+            }
         </div>
     );
 };

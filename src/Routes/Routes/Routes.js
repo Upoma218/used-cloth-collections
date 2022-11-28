@@ -15,8 +15,8 @@ import SignUp from "../../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
-import Categories from "../../Pages/Home/Categories/Categories";
 import Category from "../../Pages/Home/Categories/Category";
+import Payment from "../../Pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -92,7 +92,14 @@ export const router = createBrowserRouter([
                 path: '/dashboard/addProducts',
                 element:<AddProducts></AddProducts>
 
-            }
+            },
+           
+            {
+                path: '/dashboard/payment/:id',
+                element:<Payment></Payment>,
+                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
+
+            },
             
         ]
     }
