@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const CheckoutForm = ({ booking }) => {
     const [cardError, setCardError] = useState('');
@@ -14,8 +15,8 @@ const CheckoutForm = ({ booking }) => {
     const { originalPrice, email, name, _id } = booking;
 
     useEffect(() => {
-        
-        fetch("http://localhost:5000/create-payment-intent", {
+
+        fetch("https://used-cloth-collections-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -80,7 +81,7 @@ const CheckoutForm = ({ booking }) => {
                 email,
                 bookingId: _id
             }
-            fetch('http://localhost:5000/payments', {
+            fetch('https://used-cloth-collections-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -96,20 +97,18 @@ const CheckoutForm = ({ booking }) => {
                         setTransactionId(paymentIntent.id);
                     }
                 })
-            fetch('http://localhost:5000/products', {
+            fetch(`https://used-cloth-collections-server.vercel.app/products/${_id}`, {
                 method: 'PUT',
                 headers: {
-                    'content-type': 'application/json',
-                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 },
-                body: JSON.stringify(payment)
+                body: JSON.stringify()
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
-                    if (data.insertedId) {
-                        setSuccess('Congrats! your payment completed');
-                        setTransactionId(paymentIntent.id);
+                    if (data.modifiedCount > 0) {
+                        console.log(data)
+                        toast.success(' Status Updated successfully');
                     }
                 })
         }
@@ -140,7 +139,7 @@ const CheckoutForm = ({ booking }) => {
                 <button
                     className='btn btn-sm mt-4 ml-72 text-white flex justify-center'
                     type="submit"
-                    >
+                >
                     Pay
                 </button>
             </form>

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider';
 
-const BookingModal = ({ bookings, setBookings, refetch, product }) => {
+const BookingModal = ({ bookings, setBookings, refetch }) => {
     const { originalPrice, resalePrice, title, image } = bookings;
     console.log("bookings",bookings)
     const { user } = useContext(AuthContext);
@@ -15,17 +15,17 @@ const BookingModal = ({ bookings, setBookings, refetch, product }) => {
         const meetingLocation = form.meetingLocation.value;
         const booking = {
             name,
-            originalPrice,
-            resalePrice,
-            title,
-            image,
+            originalPrice : originalPrice,
+            resalePrice : resalePrice,
+            title : title,
+            image : image,
             meetingLocation,
             email,
             phone
         }
 
         console.log(booking);
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://used-cloth-collections-server.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

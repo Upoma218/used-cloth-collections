@@ -1,13 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
+import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
+import Loading from '../../Shared/Loading/Loading';
 
 const MyProducts = () => {
-    const { user } = useContext(AuthContext);
-    const url = `http://localhost:5000/orders?email=${user?.email}`;
 
-    const { data: orders = [] } = useQuery({
+    const { user } = useContext(AuthContext);
+    const url = `https://used-cloth-collections-server.vercel.app/orders?email=${user?.email}`;
+    const [deletingProduct, setDeletingProduct] = useState(null);
+    const closeModal = () => {
+        setDeletingProduct(null)
+    }
+
+    const { data: orders = [], isLoading, refetch } = useQuery({
         queryKey: ['orders', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
@@ -19,6 +27,56 @@ const MyProducts = () => {
             return data;
         }
     })
+
+
+    const { data: bookings = [] } = useQuery({
+        queryKey: ['bookings'],
+        queryFn: async () => {
+            const res = await fetch('https://used-cloth-collections-server.vercel.app/bookings', {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
+            const data = await res.json();
+            return data;
+        }
+    })
+    console.log('checking paid bookings',bookings)
+    const handleDeleteProduct = product => {
+        fetch(`https://used-cloth-collections-server.vercel.app/products/${product._id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch();
+                    toast.success(`Product deleted successfully`)
+                }
+                console.log(data)
+            })
+    }
+    const handleAdvertise = id => {
+        fetch(`https://used-cloth-collections-server.vercel.app/advertised/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    console.log(data)
+                    toast.success(' Product advertised Successfully');
+                }
+            })
+    }
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     return (
         <div>
             <h1 className='text-2xl font-bold text-center mb-6'>My Products</h1>
@@ -35,7 +93,7 @@ const MyProducts = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    {
+                        {
                             orders &&
                             orders?.map((order, i) => <tr key={order._id}>
                                 <th>{i + 1}</th>
@@ -50,20 +108,41 @@ const MyProducts = () => {
                                     </div>
                                 </div></td>
                                 <td>{order.originalPrice}</td>
-                                {/* <td>{order.resalePrice}</td> */}
+                                <td><button className='btn btn-xs text-white'>Available</button></td>
+                                <td><button className='btn btn-xs text-white'onClick={() => handleAdvertise(order._id)}>Advertise</button></td>
+                                
+                                
+                              {/*   <td>
+                                    {
+                                        bookings && bookings.map(booking => <span key={booking.key}>
+                                            {
+                                                booking.originalPrice && !booking.paid &&
+                                                <button className='btn btn-xs text-white'>Advertise</button>
+                                            }
+                                            
+                                        </span>)
+                                    }
+                                </td> */}
                                 <td>
-                                    <button className='btn btn-xs text-white'>Available</button>
-                                </td>
-                                <td>
-                                    <button className='btn btn-xs text-white'>Advertisement</button>
-                                </td>
-                                <td>
-                                    <button className='btn btn-xs text-white'>Delete</button>
+                                    <label htmlFor="confirmation-modal" onClick={() => setDeletingProduct(order)} className="btn btn-error btn-xs text-white">Delete</label>
                                 </td>
                             </tr>)
                         }
                     </tbody>
                 </table>
+            </div>
+            <div>
+                {
+                    deletingProduct && <ConfirmationModal
+                        title={`Are you sure about deleting this Product?`}
+                        message={`If you delete once, ${deletingProduct.name} will be permanently deleted!`}
+                        closeModal={closeModal}
+                        successAction={handleDeleteProduct}
+                        modalData={deletingProduct}
+                        buttonName="Delete">
+                    </ConfirmationModal>
+                }
+
             </div>
         </div>
     );

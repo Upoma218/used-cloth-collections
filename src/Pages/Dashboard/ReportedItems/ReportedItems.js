@@ -1,16 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
+import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 import Loading from '../../Shared/Loading/Loading';
 const ReportedItems = () => {
 
+    const [deletingProduct, setDeletingProduct] = useState(null);
+    const closeModal = () => {
+        setDeletingProduct(null)
+    }
+
     const { user } = useContext(AuthContext);
 
-    const { data: reports = [], isLoading } = useQuery({
+    const { data: reports = [], isLoading, refetch } = useQuery({
         queryKey: ['reports', user?.email],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/reported', {
+            const res = await fetch('https://used-cloth-collections-server.vercel.app/reported', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -20,6 +27,22 @@ const ReportedItems = () => {
 
         }
     })
+    const handleDeleteProduct = product => {
+        fetch(`https://used-cloth-collections-server.vercel.app/products/${product._id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch();
+                    toast.success(`Product deleted successfully`)
+                }
+                console.log(data)
+            })
+    }
 
     if (isLoading) {
         return <Loading></Loading>
@@ -35,8 +58,8 @@ const ReportedItems = () => {
                             <th></th>
                             <th>Product Name</th>
                             <th>Original Price</th>
-                            <th>Resale Price</th>
-                            <th>Payment</th>
+                            <th>Category</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,13 +79,24 @@ const ReportedItems = () => {
                                 </div></td>
                                 <td>{report.originalPrice}</td>
                                 <td>{report.category}</td>
-                                <td>
-                                    <button className='btn btn-xs text-white'>Delete</button>
-                                </td>
+                                <td><label htmlFor="confirmation-modal" onClick={() => setDeletingProduct(report)} className="btn btn-error btn-xs text-white">Delete</label></td>
                             </tr>)
                         }
                     </tbody>
                 </table>
+            </div>
+            <div>
+                {
+                    deletingProduct && <ConfirmationModal
+                        title={`Are you sure about deleting this Product?`}
+                        message={`If you delete once, ${deletingProduct.name} will be permanently deleted!`}
+                        closeModal={closeModal}
+                        successAction={handleDeleteProduct}
+                        modalData={deletingProduct}
+                        buttonName="Delete">
+                    </ConfirmationModal>
+                }
+
             </div>
         </div>
     );

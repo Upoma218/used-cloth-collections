@@ -12,7 +12,7 @@ const AllBuyers = () => {
         setDeletingBuyer(null)
     }
     const { user } = useContext(AuthContext);
-    const url = 'http://localhost:5000/buyerUser';
+    const url = 'https://used-cloth-collections-server.vercel.app/buyerUser';
 
     const { data: buyers = [], isLoading, refetch } = useQuery({
         queryKey: ['buyers', user?.email],
@@ -30,7 +30,7 @@ const AllBuyers = () => {
     })
 
     const handleDeleteBuyer = seller => {
-        fetch(`http://localhost:5000/users/${seller._id}`, {
+        fetch(`https://used-cloth-collections-server.vercel.app/users/${seller._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -88,7 +88,7 @@ const AllBuyers = () => {
                     closeModal={closeModal}
                     successAction={handleDeleteBuyer}
                     modalData={deletingBuyer}
-                    successButtonName="Delete">
+                    buttonName="Delete">
                 </ConfirmationModal>
             }
         </div>

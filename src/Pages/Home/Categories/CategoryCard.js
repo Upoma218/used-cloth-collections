@@ -14,7 +14,7 @@ const CategoryCard = ({ product }) => {
     const { data: dbUserNew = [], isLoading, refetch } = useQuery({
         queryKey: ['userDB', email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/userEmail?email=${email}`)
+            const res = await fetch(`https://used-cloth-collections-server.vercel.app/userEmail?email=${email}`)
             const data = await res.json()
             return data;
         }
@@ -24,7 +24,7 @@ const CategoryCard = ({ product }) => {
     // console.log(dbUserNew[0]);
 
     const handleReport = id => {
-        fetch(`http://localhost:5000/products/${id}`, {
+        fetch(`https://used-cloth-collections-server.vercel.app/products/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

@@ -14,7 +14,7 @@ const AddProducts = () => {
 
     const navigate = useNavigate();
     const navigation = useNavigation();
-    const url = `http://localhost:5000/users/${user.email}`;
+    const url = `https://used-cloth-collections-server.vercel.app/users/${user.email}`;
     const [seller, setSeller] = useState(null);
 
     useEffect(() => {
@@ -54,7 +54,7 @@ const AddProducts = () => {
                     }
 
 
-                    fetch('http://localhost:5000/products', {
+                    fetch('https://used-cloth-collections-server.vercel.app/products', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

@@ -5,7 +5,7 @@ import { AuthContext } from '../../../Context/AuthProvider';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+    const url = `https://used-cloth-collections-server.vercel.app/bookings?email=${user?.email}`;
 
     const { data: bookings = [] } = useQuery({
         queryKey: ['bookings', user?.email],
@@ -19,6 +19,7 @@ const MyOrders = () => {
             return data;
         }
     })
+    // console.log('checking paid bookings',bookings)
     return (
         <div>
             <h1 className='text-2xl font-bold text-center mb-6'>My Orders</h1>
@@ -45,8 +46,7 @@ const MyOrders = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <div className="font-bold">{booking.name}</div>
-                                        <div className="text-sm opacity-50">{booking.email}</div>
+                                        <div className="font-bold">{booking.title}</div>
                                     </div>
                                 </div></td>
                                 <td>{booking.originalPrice}</td>
