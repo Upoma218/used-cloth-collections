@@ -101,8 +101,7 @@ const CheckoutForm = ({ booking }) => {
                 method: 'PUT',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                },
-                body: JSON.stringify()
+                }
             })
                 .then(res => res.json())
                 .then(data => {
@@ -139,6 +138,7 @@ const CheckoutForm = ({ booking }) => {
                 <button
                     className='btn btn-sm mt-4 ml-72 text-white flex justify-center'
                     type="submit"
+                    disabled={!stripe || !buyerSecret || processing}
                 >
                     Pay
                 </button>

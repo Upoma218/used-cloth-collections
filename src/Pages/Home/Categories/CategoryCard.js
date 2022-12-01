@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import verified from '../../../Assests/Icons/verified.png';
 import BookingModal from '../../Shared/BookingModal/BookingModal';
@@ -7,8 +7,8 @@ import Loading from '../../Shared/Loading/Loading';
 
 const CategoryCard = ({ product }) => {
     const [bookings, setBookings] = useState(null);
-    const { email, title, image, details, timesOfUse, quality, originalPrice, resalePrice, postedDate, sellersName, phone, location} = product;
-    console.log(bookings)
+    const { email, title, image, details, timesOfUse, quality, originalPrice, resalePrice, postedDate, sellersName, phone, location, category} = product;
+    // console.log(bookings)
     // console.log(email)
 
     const { data: dbUserNew = [], isLoading, refetch } = useQuery({
@@ -20,11 +20,11 @@ const CategoryCard = ({ product }) => {
         }
     })
 
-    
-    // console.log(dbUserNew[0]);
-
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     const handleReport = id => {
-        fetch(`https://used-cloth-collections-server.vercel.app/products/${id}`, {
+        fetch(`https://used-cloth-collections-server.vercel.app/reportedProducts/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -38,9 +38,7 @@ const CategoryCard = ({ product }) => {
                 }
             })
     }
-    if (isLoading) {
-        return <Loading></Loading>
-    }
+   
 
     return (
         <div className="card lg:card-side bg-base-content shadow-xl my-12 p-6" key={product._id}>
@@ -48,6 +46,7 @@ const CategoryCard = ({ product }) => {
             <div className="card-body  text-white ml-12">
                 <h2 className="text-2xl mb-6 font-bold">Product Name :  {title}</h2>
                 <p className='font-bold '>Product Details : <span className='font-normal'>{details}</span></p>
+                <p className='font-bold '>Product Details : <span className='font-normal'>{category}</span></p>
                 <p className='font-bold '>Times of Use : <span className='font-normal'>{timesOfUse}</span></p>
                 <p className='font-bold '>Condition : <span className='font-normal'>{quality}</span></p>
                 <p className='font-bold '>Original Price : <span className='font-normal'>{originalPrice}</span></p>

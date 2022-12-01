@@ -4,7 +4,6 @@ import Main from "../../Layouts/Main";
 import Blog from "../../Pages/Blog/Blog";
 import AddProducts from "../../Pages/Dashboard/AddProducts/AddProducts";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
-import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
 import About from "../../Pages/Home/About/About";
@@ -17,6 +16,7 @@ import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
 import Category from "../../Pages/Home/Categories/Category";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
+import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 
 export const router = createBrowserRouter([
     {
@@ -65,7 +65,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/myOrders',
-                element:<MyOrders></MyOrders>
+                element: <MyOrders></MyOrders>
 
             },
             {
@@ -75,12 +75,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/users/Buyers',
-                element:<AllBuyers></AllBuyers>,
+                element: <AllBuyers></AllBuyers>
 
             },
             {
                 path: '/dashboard/reportedItems',
-                element:<ReportedItems></ReportedItems>
+                element: <ReportedItems></ReportedItems>
 
             },
             {
@@ -93,7 +93,7 @@ export const router = createBrowserRouter([
                 element:<AddProducts></AddProducts>
 
             },
-           
+            
             {
                 path: '/dashboard/payment/:id',
                 element:<Payment></Payment>,

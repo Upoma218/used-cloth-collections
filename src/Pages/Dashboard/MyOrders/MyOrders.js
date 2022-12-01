@@ -2,15 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
+import Loading from '../../Shared/Loading/Loading';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
-    const url = `https://used-cloth-collections-server.vercel.app/bookings?email=${user?.email}`;
 
-    const { data: bookings = [] } = useQuery({
-        queryKey: ['bookings', user?.email],
+    const { data: myBookings = [], isLoading, } = useQuery({
+        queryKey: ['myBookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(url, {
+            const res = await fetch(`https://used-cloth-collections-server.vercel.app/myBookings?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -19,7 +19,10 @@ const MyOrders = () => {
             return data;
         }
     })
-    // console.log('checking paid bookings',bookings)
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+    // console.log('checking paid myBookings',myBookings)
     return (
         <div>
             <h1 className='text-2xl font-bold text-center mb-6'>My Orders</h1>
@@ -36,28 +39,28 @@ const MyOrders = () => {
                     </thead>
                     <tbody>
                     {
-                            bookings?.length &&
-                            bookings?.map((booking, i) => <tr key={booking._id}>
+                            myBookings?.length &&
+                            myBookings?.map((myBooking, i) => <tr key={myBooking._id}>
                                 <th>{i + 1}</th>
                                 <td><div className="flex items-center space-x-3">
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
-                                            <img src={booking.image} alt="Avatar Tailwind CSS Component" />
+                                            <img src={myBooking.image} alt="Avatar Tailwind CSS Component" />
                                         </div>
                                     </div>
                                     <div>
-                                        <div className="font-bold">{booking.title}</div>
+                                        <div className="font-bold">{myBooking.title}</div>
                                     </div>
                                 </div></td>
-                                <td>{booking.originalPrice}</td>
-                                <td>{booking.resalePrice}</td>
+                                <td>{myBooking.originalPrice}</td>
+                                <td>{myBooking.resalePrice}</td>
                                 <td>
                                     {
-                                        booking.originalPrice && !booking.paid &&
-                                        <Link to={`/dashboard/payment/${booking._id}`}><button className='btn btn-xs text-white'>Pay Bill</button></Link>
+                                        myBooking.originalPrice && !myBooking.paid &&
+                                        <Link to={`/dashboard/payment/${myBooking._id}`}><button className='btn btn-xs text-white'>Pay Bill</button></Link>
                                     }
                                     {
-                                        booking.originalPrice && booking.paid && <span className='text-green-800'>Paid</span>
+                                        myBooking.originalPrice && myBooking.paid && <span className='text-green-800'>Paid</span>
                                     }
                                 </td>
                             </tr>)

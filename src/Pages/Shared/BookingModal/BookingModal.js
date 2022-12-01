@@ -4,7 +4,7 @@ import { AuthContext } from '../../../Context/AuthProvider';
 
 const BookingModal = ({ bookings, setBookings, refetch }) => {
     const { originalPrice, resalePrice, title, image } = bookings;
-    console.log("bookings",bookings)
+    // console.log("bookings",bookings)
     const { user } = useContext(AuthContext);
     const handleBooking = event => {
         event.preventDefault();

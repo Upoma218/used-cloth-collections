@@ -14,11 +14,10 @@ const AddProducts = () => {
 
     const navigate = useNavigate();
     const navigation = useNavigation();
-    const url = `https://used-cloth-collections-server.vercel.app/users/${user.email}`;
     const [seller, setSeller] = useState(null);
 
     useEffect(() => {
-        fetch(url)
+        fetch(`https://used-cloth-collections-server.vercel.app/users/${user.email}`)
         .then(res => res.json())
         .then(data => setSeller(data))
 

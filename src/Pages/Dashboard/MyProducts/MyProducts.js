@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 import Loading from '../../Shared/Loading/Loading';
@@ -9,16 +8,15 @@ import Loading from '../../Shared/Loading/Loading';
 const MyProducts = () => {
 
     const { user } = useContext(AuthContext);
-    const url = `https://used-cloth-collections-server.vercel.app/orders?email=${user?.email}`;
     const [deletingProduct, setDeletingProduct] = useState(null);
     const closeModal = () => {
         setDeletingProduct(null)
     }
 
-    const { data: orders = [], isLoading, refetch } = useQuery({
-        queryKey: ['orders', user?.email],
+    const { data: myProducts = [], isLoading, refetch } = useQuery({
+        queryKey: ['myProducts', user?.email],
         queryFn: async () => {
-            const res = await fetch(url, {
+            const res = await fetch(`https://used-cloth-collections-server.vercel.app/myProducts?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -94,22 +92,22 @@ const MyProducts = () => {
                     </thead>
                     <tbody>
                         {
-                            orders &&
-                            orders?.map((order, i) => <tr key={order._id}>
+                            myProducts &&
+                            myProducts?.map((myProduct, i) => <tr key={myProduct._id}>
                                 <th>{i + 1}</th>
                                 <td><div className="flex items-center space-x-3">
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
-                                            <img src={order.image} alt="Avatar Tailwind CSS Component" />
+                                            <img src={myProduct.image} alt="Avatar Tailwind CSS Component" />
                                         </div>
                                     </div>
                                     <div>
-                                        <div className="font-bold">{order.title}</div>
+                                        <div className="font-bold">{myProduct.title}</div>
                                     </div>
                                 </div></td>
-                                <td>{order.originalPrice}</td>
+                                <td>{myProduct.originalPrice}</td>
                                 <td><button className='btn btn-xs text-white'>Available</button></td>
-                                <td><button className='btn btn-xs text-white'onClick={() => handleAdvertise(order._id)}>Advertise</button></td>
+                                <td><button className='btn btn-xs text-white'onClick={() => handleAdvertise(myProduct._id)}>Advertise</button></td>
                                 
                                 
                               {/*   <td>
@@ -124,7 +122,7 @@ const MyProducts = () => {
                                     }
                                 </td> */}
                                 <td>
-                                    <label htmlFor="confirmation-modal" onClick={() => setDeletingProduct(order)} className="btn btn-error btn-xs text-white">Delete</label>
+                                    <label htmlFor="confirmation-modal" onClick={() => setDeletingProduct(myProduct)} className="btn btn-error btn-xs text-white">Delete</label>
                                 </td>
                             </tr>)
                         }
