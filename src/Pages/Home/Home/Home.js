@@ -6,7 +6,7 @@ import Categories from '../Categories/Categories';
 
 const Home = () => {
     return (
-        <div className=''>
+        <div>
           <Banner></Banner>
           <About></About>
           <AdvertisedProducts></AdvertisedProducts>

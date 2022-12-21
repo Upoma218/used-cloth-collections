@@ -5,7 +5,7 @@ import CategoryCard from './CategoryCard';
 const Category = () => {
     const products = useLoaderData();
     console.log(products)
- 
+
 
     return (
         <div className='my-12 lg:px-60'>
@@ -13,9 +13,9 @@ const Category = () => {
             <div className='grid grid-cols-1 mt-12'>
                 {
                     products?.length &&
-                    products.map(product =><CategoryCard key={product._id} product={product}></CategoryCard>
-                        
-                        )
+                    products.map(product => <CategoryCard key={product._id} product={product}></CategoryCard>
+
+                    )
                 }
             </div>
 
