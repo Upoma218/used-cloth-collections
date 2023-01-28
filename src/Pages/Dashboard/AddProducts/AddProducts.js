@@ -79,7 +79,7 @@ const AddProducts = () => {
     return (
         <div>
             <h1 className='text-2xl font-bold text-center mb-6'>Add Products</h1>
-            <div>
+            <div data-aos="zoom-out-left">
                 <div className='p-7 rounded-2xl bg-white lg:mx-auto'>
                     <form onSubmit={handleSubmit(handleAddProduct)}>
                         <div className="form-control w-full min-w-xs">

@@ -3,7 +3,8 @@ import about from '../../../Assests/Images/about.png';
 
 const About = () => {
     return (
-        <div className="hero min-h-screen bg-base-200">
+        <div className="hero min-h-screen bg-white" data-aos="fade-up"
+        data-aos-duration="3000">
             <div className="hero-content flex-col lg:flex-row">
                 <img src={about} className="lg:max-w-sm lg:w-1/2" alt='' />
                 <div className='lg:w-1/2 lg:pl-32 text-center  lg:text-left'>

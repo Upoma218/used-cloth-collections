@@ -43,9 +43,14 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/categories/:id',
-                element: <PrivateRoute><Category></Category></PrivateRoute>,
+                element: <Category></Category>,
                 loader: ({params}) => fetch(`https://used-cloth-collections-server.vercel.app/categories/${params.id}`)
             },
+            // {
+            //     path: '/categories/:id',
+            //     element: <PrivateRoute><Category></Category></PrivateRoute>,
+            //     loader: ({params}) => fetch(`https://used-cloth-collections-server.vercel.app/categories/${params.id}`)
+            // },
             {
                 path: '/blog',
                 element: <Blog></Blog>

@@ -4,7 +4,7 @@ import logo from '../../../Assests/Icons/logo.png';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const Navbar = () => {
-    const { user, logOut } = useContext(AuthContext);
+    const { /* user, */ logOut } = useContext(AuthContext);
     const handleLogOut = () => {
         logOut()
             .then(() => { })
@@ -16,16 +16,19 @@ const Navbar = () => {
         <li><Link to='/about'>About</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
         <li>
-            {
+            {/* {
                 user?.uid ?
                     <>
-                        <li><Link to='/dashboard'>Dashboard</Link></li>
+                        <Link to='/dashboard'>Dashboard</Link>
                         <button onClick={handleLogOut}>Logout</button>
                     </>
                     :
                     <Link to='/login'>Login</Link>
 
-            }
+            } */}
+             <Link to='/dashboard'>Dashboard</Link>
+                        <button onClick={handleLogOut}>Logout</button>
+            <Link to='/login'>Login</Link>
         </li>
     </React.Fragment>
     return (

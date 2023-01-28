@@ -8,9 +8,9 @@ const Category = () => {
 
 
     return (
-        <div className='my-12 lg:px-60'>
+        <div className='my-12 px-6 md:px-24 lg:px-40'data-aos="zoom-in-down">
             <h1 className="text-5xl font-bold text-center">Product Categories</h1>
-            <div className='grid grid-cols-1 mt-12'>
+            <div className='grid grid-cols-1 gap-8 mt-12'>
                 {
                     products?.length &&
                     products.map(product => <CategoryCard key={product._id} product={product}></CategoryCard>

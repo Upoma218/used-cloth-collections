@@ -41,9 +41,9 @@ const CategoryCard = ({ product }) => {
    
 
     return (
-        <div className="card lg:card-side bg-base-content shadow-xl my-12 p-6" key={product._id}>
-            <figure><img src={image} alt="Album" className='w-96 h-full' /></figure>
-            <div className="card-body  text-white ml-12">
+        <div className="card lg:card-side bg-white shadow-xl my-12 rounded-none" key={product._id} data-aos="zoom-in-left">
+            <figure><img src={image} alt="Album" className='w-full lg:w-96 h-80 lg:h-full' /></figure>
+            <div className="card-body ml-12">
                 <h2 className="text-2xl mb-6 font-bold">Product Name :  {title}</h2>
                 <p className='font-bold '>Product Details : <span className='font-normal'>{details}</span></p>
                 <p className='font-bold '>Product Details : <span className='font-normal'>{category}</span></p>
@@ -66,7 +66,7 @@ const CategoryCard = ({ product }) => {
                         {
                             dbUserNew[0]?.verification === 'verified' &&
                             <label
-                                className="btn glass btn-sm"
+                                className="btn btn-sm"
                                 onClick={() => setBookings(product)}
                                 htmlFor="booking-modal" >
                                 BOOK NOW
@@ -74,7 +74,7 @@ const CategoryCard = ({ product }) => {
                         }
 
                     </div>
-                    <button onClick={() => handleReport(product._id)} className="btn btn-sm glass mt-5">Report</button>
+                    <button onClick={() => handleReport(product._id)} className="btn btn-sm mt-5">Report</button>
                 </div>
             </div>
             {

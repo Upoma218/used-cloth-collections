@@ -71,7 +71,7 @@ const AllSellers = email => {
     return (
         <div>
             <h1 className='text-2xl font-bold text-center mb-6'>All Sellers</h1>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto"data-aos="zoom-out-left">
                 <table className="table w-full">
                     <thead>
                         <tr>
