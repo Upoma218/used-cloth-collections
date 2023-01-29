@@ -17,7 +17,7 @@ const AllSellers = email => {
     const { data: sellers = [], isLoading, refetch } = useQuery({
         queryKey: ['sellers', user?.email],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/sellerUser', {
+            const res = await fetch('https://used-cloth-collections-server.vercel.app/sellerUser', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -30,7 +30,7 @@ const AllSellers = email => {
 
 
     const handleVerifySeller = _id => {
-        fetch(`http://localhost:5000/users/Sellers/${_id}`, {
+        fetch(`https://used-cloth-collections-server.vercel.app/users/Sellers/${_id}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -48,7 +48,7 @@ const AllSellers = email => {
     }
 
     const handleDeleteSeller = seller => {
-        fetch(`http://localhost:5000/users/${seller._id}`, {
+        fetch(`https://used-cloth-collections-server.vercel.app/users/${seller._id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',

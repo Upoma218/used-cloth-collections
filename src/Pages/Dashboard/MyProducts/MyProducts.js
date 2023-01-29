@@ -16,7 +16,7 @@ const MyProducts = () => {
     const { data: myProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['myProducts', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myProducts?email=${user?.email}`, {
+            const res = await fetch(`https://used-cloth-collections-server.vercel.app/myProducts?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -30,7 +30,7 @@ const MyProducts = () => {
     const { data: bookings = [] } = useQuery({
         queryKey: ['bookings'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/bookings', {
+            const res = await fetch('https://used-cloth-collections-server.vercel.app/bookings', {
                 headers: {
                     'content-type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -42,7 +42,7 @@ const MyProducts = () => {
     })
     console.log('checking paid bookings', bookings)
     const handleDeleteProduct = product => {
-        fetch(`http://localhost:5000/products/${product._id}`, {
+        fetch(`https://used-cloth-collections-server.vercel.app/products/${product._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -58,7 +58,7 @@ const MyProducts = () => {
             })
     }
     const handleAdvertise = id => {
-        fetch(`http://localhost:5000/advertised/${id}`, {
+        fetch(`https://used-cloth-collections-server.vercel.app/advertised/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

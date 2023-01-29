@@ -16,7 +16,7 @@ const ReportedItems = () => {
     const { data: reports = [], isLoading, refetch } = useQuery({
         queryKey: ['reports', user?.email],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/reported', {
+            const res = await fetch('https://used-cloth-collections-server.vercel.app/reported', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -27,7 +27,7 @@ const ReportedItems = () => {
         }
     })
     const handleDeleteProduct = product => {
-        fetch(`http://localhost:5000/products/${product._id}`, {
+        fetch(`https://used-cloth-collections-server.vercel.app/products/${product._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

@@ -10,7 +10,7 @@ const MyOrders = () => {
     const { data: myBookings = [], isLoading, } = useQuery({
         queryKey: ['myBookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myBookings?email=${user?.email}`, {
+            const res = await fetch(`https://used-cloth-collections-server.vercel.app/myBookings?email=${user?.email}`, {
                 headers: {
                     'content-type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`

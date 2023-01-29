@@ -12,7 +12,7 @@ const AdvertisedProducts = () => {
 
         queryKey: ['products', user?.email],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/advertised', {
+            const res = await fetch('https://used-cloth-collections-server.vercel.app/advertised', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }

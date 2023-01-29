@@ -16,7 +16,7 @@ const AddProducts = () => {
     const [seller, setSeller] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${user.email}`)
+        fetch(`https://used-cloth-collections-server.vercel.app/users/${user.email}`)
         .then(res => res.json())
         .then(data => setSeller(data))
 
@@ -52,7 +52,7 @@ const AddProducts = () => {
                     }
 
 
-                    fetch('http://localhost:5000/products', {
+                    fetch('https://used-cloth-collections-server.vercel.app/products', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

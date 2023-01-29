@@ -9,7 +9,7 @@ const AllProducts = () => {
     const [isFlipped, setIsFlipped] = useState(false)
     const [bookings, setBookings] = useState(null);
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://used-cloth-collections-server.vercel.app/products')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])

@@ -6,7 +6,7 @@ const useBuyer = email => {
 
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/usersBuyers/${email}`)
+            fetch(`https://used-cloth-collections-server.vercel.app/usersBuyers/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setIsBuyer(data.isBuyer);
