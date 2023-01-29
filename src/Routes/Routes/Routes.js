@@ -18,6 +18,7 @@ import Category from "../../Pages/Home/Categories/Category";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import AddReview from "../../Pages/ClientsReview/AddReview";
+import AllProducts from "../../Pages/ShopNow/AllProducts";
 
 export const router = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
             {
                 path: '/addReview',
                 element: <AddReview></AddReview>
+            },
+            {
+                path: '/allProducts',
+                element: <AllProducts></AllProducts>
             },
             {
                 path: '/categories/:id',

@@ -10,9 +10,9 @@ const BuyNow = () => {
             <div className="hero-overlay bg-opacity-70 bg-rose-100"></div>
             <div className="hero-content text-center">
                 <div className=" py-12">
-                    <h1 className='text-5xl font-bold'>Do you want to order your preferred cloth?</h1>
+                    <h1 className='text-5xl font-semibold'>Do you want to order your preferred cloth?</h1>
                     <Link to="signup">
-                        <button className='btn btn-outline font-extrabold mt-12 btn-lg text-3xl shadow-md shadow-neutral-focus rounded-none'>Join Us Now</button></Link>
+                        <button className='btn btn-outline mt-12 btn-lg text-3xl shadow-md shadow-neutral-focus rounded-none'>Join Us Now</button></Link>
                 </div>
             </div>
         </div>

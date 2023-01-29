@@ -16,7 +16,7 @@ const Categories = () => {
         <div className='lg:px-32 bg-white py-24'data-aos="flip-left"
         data-aos-easing="ease-out-cubic"
         data-aos-duration="2000">
-        <h1 className="text-5xl font-bold text-center">Product Categories</h1>
+        <h1 className="text-5xl text-center">Product Categories</h1>
         <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-12 mt-24'data-aos="fade-up"
         data-aos-duration="3000">
             {

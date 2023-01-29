@@ -41,7 +41,7 @@ const CategoryCard = ({ product }) => {
 
 
     return (
-        <div className="card lg:card-side bg-white shadow-xl my-12 rounded-none" key={product._id} data-aos="zoom-in-left">
+        <div className="card lg:card-side bg-white my-12 rounded-none" key={product._id} data-aos="zoom-in-left">
             <figure><img src={image} alt="Album" className='w-full lg:w-96 h-80 lg:h-full' /></figure>
             <div className="card-body ml-12">
                 <h2 className="text-2xl mb-6 font-bold">Product Name :  {title}</h2>
@@ -61,17 +61,17 @@ const CategoryCard = ({ product }) => {
                 </span></p>
                 <p className='font-bold '>Contact No : <span className='font-normal'>{phone}</span></p>
                 <p className='font-bold '>Location : <span className='font-normal'>{location}</span></p>
-                <div className='mt-5'>
+                <div className='mt-5 flex justify-start items-center'>
                     <div className="card-actions">
                         <label
-                            className="btn text-white btn-sm rounded-none"
+                            className="btn text-white btn-sm rounded-none mr-4"
                             onClick={() => setBookings(product)}
                             htmlFor="booking-modal" >
                             BOOK NOW
                         </label>
 
                     </div>
-                    <button onClick={() => handleReport(product._id)} className="btn rounded-none text-white btn-sm mt-5">Report</button>
+                    <button onClick={() => handleReport(product._id)} className="btn rounded-none text-white btn-sm">Report</button>
                 </div>
             </div>
             {

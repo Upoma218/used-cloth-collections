@@ -37,7 +37,7 @@ const AdvertisedProducts = () => {
         data-aos-duration="1500">
             {
                 products?.length !== 0 && <div className='my-12 lg:px-32 py-12'>
-                    <h1 className="text-5xl font-bold text-center">Advertised Products</h1>
+                    <h1 className="text-5xl text-center">Advertised Products</h1>
                     <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-12 mt-24'>
                         {
                             products?.length &&

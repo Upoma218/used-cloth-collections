@@ -13,9 +13,9 @@ const ClientsReview = () => {
 
     }, [])
     return (
-        <div className='lg:px-32 bg-white pb-24' data-aos="fade-up"
+        <div className=' mt-24 lg:px-32 bg-white pb-24' data-aos="fade-up"
             data-aos-duration="3000">
-            <h1 className="text-5xl font-bold text-center">What Our Customers Say About Us!</h1>
+            <h1 className="text-5xl text-center">What Our Customers Say About Us!</h1>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-12 mt-24'>
                 {
                     reviews?.length && reviews.map(review =>
