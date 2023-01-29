@@ -5,7 +5,7 @@ const Categories = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch('https://used-cloth-collections-server.vercel.app/categories')
+        fetch('http://localhost:5000/categories')
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
@@ -13,7 +13,7 @@ const Categories = () => {
 
 
     return (
-        <div className='my-12 lg:px-32 bg-white py-24'data-aos="flip-left"
+        <div className='lg:px-32 bg-white py-24'data-aos="flip-left"
         data-aos-easing="ease-out-cubic"
         data-aos-duration="2000">
         <h1 className="text-5xl font-bold text-center">Product Categories</h1>
@@ -22,15 +22,15 @@ const Categories = () => {
             {
                 categories &&
                 categories.map(category =>
-                    <div className="card rounded-none shadow-xl" key={category._id}>
-                        <figure className="px-10 pt-10">
-                            <img src={category.image} alt="" className="h-72 w-72" />
+                    <div className="card rounded-none border-2" key={category._id}>
+                        <figure>
+                            <img src={category.image} alt="" className="h-60 w-full" />
                         </figure>
                         <div className="card-body items-center text-center">
                             <h2 className="card-title">{category.category}</h2>
                             <div className="card-actions">
                                 <Link to={`/categories/${category._id}`}>
-                                    <button className="btn btn-sm mt-4">View All</button>
+                                    <button className="btn text-white btn-sm mt-4 rounded-none">View All</button>
                                 </Link>
                             </div>
                         </div>

@@ -10,8 +10,9 @@ const MyOrders = () => {
     const { data: myBookings = [], isLoading, } = useQuery({
         queryKey: ['myBookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://used-cloth-collections-server.vercel.app/myBookings?email=${user?.email}`, {
+            const res = await fetch(`http://localhost:5000/myBookings?email=${user?.email}`, {
                 headers: {
+                    'content-type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
             });
@@ -57,7 +58,7 @@ const MyOrders = () => {
                                 <td>
                                     {
                                         myBooking.originalPrice && !myBooking.paid &&
-                                        <Link to={`/dashboard/payment/${myBooking._id}`}><button className='btn btn-xs text-white'>Pay Bill</button></Link>
+                                        <Link to={`/dashboard/payment/${myBooking._id}`}><button className='btn text-white btn text-white-xs text-white'>Pay Bill</button></Link>
                                     }
                                     {
                                         myBooking.originalPrice && myBooking.paid && <span className='text-green-800'>Paid</span>

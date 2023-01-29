@@ -71,14 +71,14 @@ const Login = () => {
                         <label className="label"> <span className="label-text">Forget Password?</span></label>
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                     </div>
-                    <input className='btn w-full text-white' value="Login" type="submit" />
+                    <input className='btn text-white w-full' value="Login" type="submit" />
                     <div>
                         {loginError && <p className='text-red-600'>{loginError}</p>}
                     </div>
                 </form>
                 <p className='my-3'>New to Doctors Portal <Link className='text-info' to="/signup">Create new Account</Link></p>
                 <div className="divider">OR</div>
-                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'><span><FcGoogle className=' text-xl mr-3'></FcGoogle></span>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignIn} className='btn text-white btn-outline w-full'><span><FcGoogle className=' text-xl mr-3'></FcGoogle></span>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );

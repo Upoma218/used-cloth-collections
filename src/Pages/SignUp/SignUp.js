@@ -41,7 +41,7 @@ const SignUp = () => {
     const saveUser = (name, email, role, phone, location) => {
         const user = { name, email, role, phone, location };
         console.log(user)
-        fetch('https://used-cloth-collections-server.vercel.app/users', {
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -106,7 +106,7 @@ const SignUp = () => {
                             className="input input-bordered w-full min-w-xs mb-5" />
                         {errors.password && <p className='text-red-600 my-2'>{errors.password.message}</p>}
                     </div>
-                    <input className='btn w-full text-white' value="Sign Up" type="submit" />
+                    <input className='btn text-white w-full' value="Sign Up" type="submit" />
                     {signUpError && <p className='text-red-600 py-3'>{signUpError}</p>}
                 </form>
                 <p className='my-3'>Already have an account? <Link className='text-info' to="/login">Login Now</Link></p>

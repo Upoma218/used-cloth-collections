@@ -16,7 +16,7 @@ const CheckoutForm = ({ booking }) => {
 
     useEffect(() => {
 
-        fetch("https://used-cloth-collections-server.vercel.app/create-payment-intent", {
+        fetch("http://localhost:5000/create-payment-intent", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -81,7 +81,7 @@ const CheckoutForm = ({ booking }) => {
                 email,
                 bookingId: _id
             }
-            fetch('https://used-cloth-collections-server.vercel.app/payments', {
+            fetch('http://localhost:5000/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -97,7 +97,7 @@ const CheckoutForm = ({ booking }) => {
                         setTransactionId(paymentIntent.id);
                     }
                 })
-            fetch(`https://used-cloth-collections-server.vercel.app/products/${_id}`, {
+            fetch(`http://localhost:5000/products/${_id}`, {
                 method: 'PUT',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -136,7 +136,7 @@ const CheckoutForm = ({ booking }) => {
                     }}
                 />
                 <button
-                    className='btn btn-sm mt-4 ml-72 text-white flex justify-center'
+                    className='btn text-white btn text-white-sm mt-4 ml-72 text-white flex justify-center'
                     type="submit"
                     disabled={!stripe || !buyerSecret || processing}
                 >

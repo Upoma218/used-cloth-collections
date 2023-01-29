@@ -17,6 +17,7 @@ import Dashboard from "../../Pages/Dashboard/Dashboard";
 import Category from "../../Pages/Home/Categories/Category";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
+import AddReview from "../../Pages/ClientsReview/AddReview";
 
 export const router = createBrowserRouter([
     {
@@ -41,15 +42,20 @@ export const router = createBrowserRouter([
                 path: '/about',
                 element: <About></About>
             },
+            
+            {
+                path: '/addReview',
+                element: <AddReview></AddReview>
+            },
             {
                 path: '/categories/:id',
                 element: <Category></Category>,
-                loader: ({params}) => fetch(`https://used-cloth-collections-server.vercel.app/categories/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
             },
             // {
             //     path: '/categories/:id',
             //     element: <PrivateRoute><Category></Category></PrivateRoute>,
-            //     loader: ({params}) => fetch(`https://used-cloth-collections-server.vercel.app/categories/${params.id}`)
+            //     loader: ({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
             // },
             {
                 path: '/blog',
@@ -102,7 +108,7 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element:<Payment></Payment>,
-                loader: ({params}) => fetch(`https://used-cloth-collections-server.vercel.app/bookings/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
 
             },
             

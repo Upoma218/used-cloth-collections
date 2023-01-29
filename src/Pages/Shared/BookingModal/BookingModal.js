@@ -25,7 +25,7 @@ const BookingModal = ({ bookings, setBookings, refetch }) => {
         }
 
         console.log(booking);
-        fetch('https://used-cloth-collections-server.vercel.app/bookings', {
+        fetch('http://localhost:5000/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -53,7 +53,7 @@ const BookingModal = ({ bookings, setBookings, refetch }) => {
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box relative">
-                    <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2"onClick={() => {setBookings(null)}}>✕</label>
+                    <label htmlFor="booking-modal" className="btn text-white btn-sm btn-circle absolute right-2 top-2"onClick={() => {setBookings(null)}}>✕</label>
                     <h3 className="text-lg font-bold">{title}</h3>
                     <form onSubmit={handleBooking}>
                         <input name='name' type="text" value={user?.displayName} className="input input-bordered w-full min-w-xs my-3" disabled />
@@ -62,7 +62,7 @@ const BookingModal = ({ bookings, setBookings, refetch }) => {
                         <input name='originalPrice' type="text" value={originalPrice} className="input input-bordered w-full min-w-xs my-3" disabled />
                         <input name='resalePrice' type="text" value={resalePrice} className="input input-bordered w-full min-w-xs my-3" disabled />
                         <input name='meetingLocation' type="text" placeholder="Meeting Location" className="input input-bordered w-full min-w-xs my-3"  />
-                        <input type="submit" className="input input-bordered w-full min-w-xs my-3 btn bg-slate-900 border-none text-white" value='SUBMIT' />
+                        <input type="submit" className="input input-bordered w-full min-w-xs my-3 btn text-white bg-slate-900 border-none text-white" value='SUBMIT' />
                     </form>
                 </div>
 

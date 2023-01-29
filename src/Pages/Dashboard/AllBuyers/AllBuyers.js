@@ -12,13 +12,14 @@ const AllBuyers = () => {
         setDeletingBuyer(null)
     }
     const { user } = useContext(AuthContext);
-    const url = 'https://used-cloth-collections-server.vercel.app/buyerUser';
+    const url = 'http://localhost:5000/buyerUser';
 
     const { data: buyers = [], isLoading, refetch } = useQuery({
         queryKey: ['buyers', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
                 headers: {
+                    'content-type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
             });
@@ -30,9 +31,10 @@ const AllBuyers = () => {
     })
 
     const handleDeleteBuyer = seller => {
-        fetch(`https://used-cloth-collections-server.vercel.app/users/${seller._id}`, {
+        fetch(`http://localhost:5000/users/${seller._id}`, {
             method: 'DELETE',
             headers: {
+                'content-type': 'application/json',
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
@@ -54,7 +56,7 @@ const AllBuyers = () => {
     return (
         <div>
             <h1 className='text-2xl font-bold text-center mb-6'>All Buyers</h1>
-            <div className="overflow-x-auto"data-aos="zoom-out-left">
+            <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
                         <tr>

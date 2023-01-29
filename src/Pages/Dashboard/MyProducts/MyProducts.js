@@ -16,7 +16,7 @@ const MyProducts = () => {
     const { data: myProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['myProducts', user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://used-cloth-collections-server.vercel.app/myProducts?email=${user?.email}`, {
+            const res = await fetch(`http://localhost:5000/myProducts?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -30,8 +30,9 @@ const MyProducts = () => {
     const { data: bookings = [] } = useQuery({
         queryKey: ['bookings'],
         queryFn: async () => {
-            const res = await fetch('https://used-cloth-collections-server.vercel.app/bookings', {
+            const res = await fetch('http://localhost:5000/bookings', {
                 headers: {
+                    'content-type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
             });
@@ -39,9 +40,9 @@ const MyProducts = () => {
             return data;
         }
     })
-    console.log('checking paid bookings',bookings)
+    console.log('checking paid bookings', bookings)
     const handleDeleteProduct = product => {
-        fetch(`https://used-cloth-collections-server.vercel.app/products/${product._id}`, {
+        fetch(`http://localhost:5000/products/${product._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -57,7 +58,7 @@ const MyProducts = () => {
             })
     }
     const handleAdvertise = id => {
-        fetch(`https://used-cloth-collections-server.vercel.app/advertised/${id}`, {
+        fetch(`http://localhost:5000/advertised/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -78,7 +79,7 @@ const MyProducts = () => {
     return (
         <div>
             <h1 className='text-2xl font-bold text-center mb-6'>My Products</h1>
-            <div className="overflow-x-auto w-full"data-aos="zoom-out-left">
+            <div className="overflow-x-auto w-full" data-aos="zoom-out-left">
                 <table className="table w-full">
                     <thead>
                         <tr>
@@ -106,23 +107,23 @@ const MyProducts = () => {
                                     </div>
                                 </div></td>
                                 <td>{myProduct.originalPrice}</td>
-                                <td><button className='btn btn-xs text-white'>Available</button></td>
-                                <td><button className='btn btn-xs text-white'onClick={() => handleAdvertise(myProduct._id)}>Advertise</button></td>
-                                
-                                
-                              {/*   <td>
+                                <td><button className='btn text-white btn text-white-xs text-white'>Available</button></td>
+                                <td><button className='btn text-white btn text-white-xs text-white' onClick={() => handleAdvertise(myProduct._id)}>Advertise</button></td>
+
+
+                                {/*   <td>
                                     {
                                         bookings && bookings.map(booking => <span key={booking.key}>
                                             {
                                                 booking.originalPrice && !booking.paid &&
-                                                <button className='btn btn-xs text-white'>Advertise</button>
+                                                <button className='btn text-white btn text-white-xs text-white'>Advertise</button>
                                             }
                                             
                                         </span>)
                                     }
                                 </td> */}
                                 <td>
-                                    <label htmlFor="confirmation-modal" onClick={() => setDeletingProduct(myProduct)} className="btn btn-error btn-xs text-white">Delete</label>
+                                    <label htmlFor="confirmation-modal" onClick={() => setDeletingProduct(myProduct)} className="btn text-white btn text-white-error btn text-white-xs text-white">Delete</label>
                                 </td>
                             </tr>)
                         }

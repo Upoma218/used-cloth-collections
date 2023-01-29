@@ -17,7 +17,7 @@ const AllSellers = email => {
     const { data: sellers = [], isLoading, refetch } = useQuery({
         queryKey: ['sellers', user?.email],
         queryFn: async () => {
-            const res = await fetch('https://used-cloth-collections-server.vercel.app/sellerUser', {
+            const res = await fetch('http://localhost:5000/sellerUser', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -30,7 +30,7 @@ const AllSellers = email => {
 
 
     const handleVerifySeller = _id => {
-        fetch(`https://used-cloth-collections-server.vercel.app/users/Sellers/${_id}`, {
+        fetch(`http://localhost:5000/users/Sellers/${_id}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -48,9 +48,10 @@ const AllSellers = email => {
     }
 
     const handleDeleteSeller = seller => {
-        fetch(`https://used-cloth-collections-server.vercel.app/users/${seller._id}`, {
+        fetch(`http://localhost:5000/users/${seller._id}`, {
             method: 'DELETE',
             headers: {
+                'content-type': 'application/json',
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
@@ -103,10 +104,10 @@ const AllSellers = email => {
                                 <td>
                                     {
                                         seller.verification !== 'verified' &&
-                                        <label className="btn btn-xs text-white" onClick={() => handleVerifySeller(seller._id)}>Verify</label>
+                                        <label className="btn text-white btn-xs" onClick={() => handleVerifySeller(seller._id)}>Verify</label>
                                     }
                                 </td>
-                                <td><label htmlFor="confirmation-modal" onClick={() => setDeletingSeller(seller)} className="btn btn-error btn-xs text-white">Delete</label></td>
+                                <td><label htmlFor="confirmation-modal" onClick={() => setDeletingSeller(seller)} className="btn text-white btn-error btn-xs">Delete</label></td>
                             </tr>)
                         }
                     </tbody>

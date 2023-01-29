@@ -12,7 +12,7 @@ const AdvertisedProducts = () => {
 
         queryKey: ['products', user?.email],
         queryFn: async () => {
-            const res = await fetch('https://used-cloth-collections-server.vercel.app/advertised', {
+            const res = await fetch('http://localhost:5000/advertised', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -42,7 +42,7 @@ const AdvertisedProducts = () => {
                         {
                             products?.length &&
                             products.map(product =>
-                                <div className="card bg-white rounded-none shadow-xl" key={product._id} data-aos="flip-left"
+                                <div className="card bg-white rounded-none" key={product._id} data-aos="flip-left"
                                 data-aos-easing="ease-out-cubic"
                                 data-aos-duration="2000">
                                     <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
@@ -51,10 +51,10 @@ const AdvertisedProducts = () => {
                                             <img src={product.image} alt="" className="h-72 w-full" onClick={handleClick}/>
                                             
                                         </figure>
-                                        <p className='text-center font-bold my-6 cursor-pointer'onClick={handleClick} >View Details</p>
+                                        <p className='text-center font-semibold my-6 cursor-pointer'onClick={handleClick} >View Details</p>
                                         </div>
                                         <div>
-                                            <button onClick={handleClick}><div className="card-body items-center text-center text-xs">
+                                            <button onClick={handleClick}><div className="card-body rounded-none items-center text-center text-xs">
                                                 <h2 className="card-title">{product.title}</h2>
                                                 <p className='font-bold '>Product Details : <span className='font-normal'>{product.details}</span></p>
                                                 <p className='font-bold '>Times of Use : <span className='font-normal'>{product.timesOfUse}</span></p>

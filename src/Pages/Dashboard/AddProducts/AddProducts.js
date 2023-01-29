@@ -5,7 +5,6 @@ import { useNavigate, useNavigation } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 import Loading from '../../Shared/Loading/Loading';
 
-
 const AddProducts = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -17,7 +16,7 @@ const AddProducts = () => {
     const [seller, setSeller] = useState(null);
 
     useEffect(() => {
-        fetch(`https://used-cloth-collections-server.vercel.app/users/${user.email}`)
+        fetch(`http://localhost:5000/users/${user.email}`)
         .then(res => res.json())
         .then(data => setSeller(data))
 
@@ -53,7 +52,7 @@ const AddProducts = () => {
                     }
 
 
-                    fetch('https://used-cloth-collections-server.vercel.app/products', {
+                    fetch('http://localhost:5000/products', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
@@ -132,7 +131,7 @@ const AddProducts = () => {
                         </div>
                         <div className="form-control w-full min-w-xs">
                             <label className="label"> <span className="label-text">Posted Date</span></label>
-                            <input type="text"{...register('postedDate', {
+                            <input type="date"{...register('postedDate', {
                                 required: "Posted Date is required"
                             })} className="input input-bordered w-full min-w-xs" placeholder='Posted Date' />
                             {errors.postedDate && <p className='text-red-600 py-3'>{errors.postedDate.message}</p>}
@@ -187,7 +186,7 @@ const AddProducts = () => {
                             })} className="input input-bordered border-dashed w-full min-w-xs p-2" placeholder='Upload Your Photo' />
                             {errors.image && <p className='text-red-600 py-3'>{errors.image.message}</p>}
                         </div>
-                        <input className='btn mt-5 w-full text-white' value="Add Product" type="submit" />
+                        <input className='btn text-white mt-5 w-full' value="Add Product" type="submit" />
                     </form>
                 </div>
             </div>

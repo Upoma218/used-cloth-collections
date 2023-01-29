@@ -16,7 +16,7 @@ const ReportedItems = () => {
     const { data: reports = [], isLoading, refetch } = useQuery({
         queryKey: ['reports', user?.email],
         queryFn: async () => {
-            const res = await fetch('https://used-cloth-collections-server.vercel.app/reported', {
+            const res = await fetch('http://localhost:5000/reported', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -27,7 +27,7 @@ const ReportedItems = () => {
         }
     })
     const handleDeleteProduct = product => {
-        fetch(`https://used-cloth-collections-server.vercel.app/products/${product._id}`, {
+        fetch(`http://localhost:5000/products/${product._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -78,7 +78,7 @@ const ReportedItems = () => {
                                 </div></td>
                                 <td>{report.originalPrice}</td>
                                 <td>{report.category}</td>
-                                <td><label htmlFor="confirmation-modal" onClick={() => setDeletingProduct(report)} className="btn btn-error btn-xs text-white">Delete</label></td>
+                                <td><label htmlFor="confirmation-modal" onClick={() => setDeletingProduct(report)} className="btn text-white btn-error btn-xs">Delete</label></td>
                             </tr>)
                         }
                     </tbody>

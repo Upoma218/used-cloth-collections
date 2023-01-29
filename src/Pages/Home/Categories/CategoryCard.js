@@ -7,14 +7,14 @@ import Loading from '../../Shared/Loading/Loading';
 
 const CategoryCard = ({ product }) => {
     const [bookings, setBookings] = useState(null);
-    const { email, title, image, details, timesOfUse, quality, originalPrice, resalePrice, postedDate, sellersName, phone, location, category} = product;
+    const { email, title, image, details, timesOfUse, quality, originalPrice, resalePrice, postedDate, sellersName, phone, location, category } = product;
     // console.log(bookings)
     // console.log(email)
 
     const { data: dbUserNew = [], isLoading, refetch } = useQuery({
         queryKey: ['userDB', email],
         queryFn: async () => {
-            const res = await fetch(`https://used-cloth-collections-server.vercel.app/userEmail?email=${email}`)
+            const res = await fetch(`http://localhost:5000/userEmail?email=${email}`)
             const data = await res.json()
             return data;
         }
@@ -24,7 +24,7 @@ const CategoryCard = ({ product }) => {
         return <Loading></Loading>
     }
     const handleReport = id => {
-        fetch(`https://used-cloth-collections-server.vercel.app/reportedProducts/${id}`, {
+        fetch(`http://localhost:5000/reportedProducts/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -38,7 +38,7 @@ const CategoryCard = ({ product }) => {
                 }
             })
     }
-   
+
 
     return (
         <div className="card lg:card-side bg-white shadow-xl my-12 rounded-none" key={product._id} data-aos="zoom-in-left">
@@ -63,18 +63,15 @@ const CategoryCard = ({ product }) => {
                 <p className='font-bold '>Location : <span className='font-normal'>{location}</span></p>
                 <div className='mt-5'>
                     <div className="card-actions">
-                        {
-                            dbUserNew[0]?.verification === 'verified' &&
-                            <label
-                                className="btn btn-sm"
-                                onClick={() => setBookings(product)}
-                                htmlFor="booking-modal" >
-                                BOOK NOW
-                            </label>
-                        }
+                        <label
+                            className="btn text-white btn-sm rounded-none"
+                            onClick={() => setBookings(product)}
+                            htmlFor="booking-modal" >
+                            BOOK NOW
+                        </label>
 
                     </div>
-                    <button onClick={() => handleReport(product._id)} className="btn btn-sm mt-5">Report</button>
+                    <button onClick={() => handleReport(product._id)} className="btn rounded-none text-white btn-sm mt-5">Report</button>
                 </div>
             </div>
             {
