@@ -10,6 +10,7 @@ const About = () => {
                 <img src={about} className="lg:max-w-sm lg:w-1/2" alt='' />
                 <div className='lg:w-1/2 lg:pl-32 text-center  lg:text-left'>
                     <h1 className="text-5xl ">About Us!</h1>
+                    <div className="divider"></div>
                     <p className="py-6">We are working with resale products. We collect short time used cloths for resale. Here you can get different type of used cloths! Our products are short time used products and our products quality is also fresh! Because we don't sell any long term used product!</p>
                     <div className="stats stats-vertical lg:stats-horizontal shadow rounded-none">
                         <div className="stat">

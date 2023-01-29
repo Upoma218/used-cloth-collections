@@ -17,6 +17,7 @@ const Categories = () => {
         data-aos-easing="ease-out-cubic"
         data-aos-duration="2000">
         <h1 className="text-5xl text-center">Product Categories</h1>
+        <div className="divider"></div>
         <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-12 mt-24'data-aos="fade-up"
         data-aos-duration="3000">
             {
