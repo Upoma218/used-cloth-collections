@@ -12,9 +12,9 @@ const Banner = () => {
         data-aos-offset="0">
             <div className="hero-overlay bg-opacity-70 bg-white"></div>
             <div className="hero-content flex-col lg:flex-row-reverse">
-                <img src={hero} className="lg:max-w-sm lg:w-1/2" alt=''data-aos="fade-down"
+                <img src={hero} className="lg:max-w-sm lg:w-1/2 cursor-pointer ease-out-in duration-500  hover:scale-75" alt=''/* data-aos="fade-down"
      data-aos-easing="linear"
-     data-aos-duration="1500" />
+     data-aos-duration="1500" */ />
                 <div className='lg:w-1/2 text-center  lg:text-left'>
                     <div className="text-5xl font-bold">
                     <TextAnimation.Slide target="Men's" text={["Men's","Women's","Kid's "]}>

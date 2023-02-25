@@ -25,7 +25,7 @@ const Categories = () => {
                 categories.map(category =>
                     <div className="card rounded-none border-2" key={category._id}>
                         <figure>
-                            <img src={category.image} alt="" className="h-60 w-full" />
+                            <img src={category.image} alt="" className="h-60 w-full ease-out-in duration-500  hover:scale-75" />
                         </figure>
                         <div className="card-body items-center text-center">
                             <h2 className="card-title">{category.category}</h2>

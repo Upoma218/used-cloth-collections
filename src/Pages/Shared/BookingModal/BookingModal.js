@@ -56,13 +56,13 @@ const BookingModal = ({ bookings, setBookings, refetch }) => {
                     <label htmlFor="booking-modal" className="btn text-white btn-sm btn-circle absolute right-2 top-2"onClick={() => {setBookings(null)}}>✕</label>
                     <h3 className="text-lg font-bold">{title}</h3>
                     <form onSubmit={handleBooking}>
-                        <input name='name' type="text" value={user?.displayName} className="input input-bordered w-full min-w-xs my-3" disabled />
-                        <input name='phone' type="text" placeholder="Phone Number" className="input input-bordered w-full min-w-xs my-3" />
-                        <input name='email' type="email" value={user?.email} className="input input-bordered w-full min-w-xs my-3" disabled />
-                        <input name='originalPrice' type="text" value={originalPrice} className="input input-bordered w-full min-w-xs my-3" disabled />
-                        <input name='resalePrice' type="text" value={resalePrice} className="input input-bordered w-full min-w-xs my-3" disabled />
-                        <input name='meetingLocation' type="text" placeholder="Meeting Location" className="input input-bordered w-full min-w-xs my-3"  />
-                        <input type="submit" className="input input-bordered w-full min-w-xs my-3 btn text-white bg-slate-900 border-none text-white" value='SUBMIT' />
+                        <input name='name' type="text" value={user?.displayName} className="input input-bordered w-full min-w-xs my-3" disabled required/>
+                        <input name='phone' type="text" placeholder="Phone Number" className="input input-bordered w-full min-w-xs my-3" required/>
+                        <input name='email' type="email" value={user?.email} className="input input-bordered w-full min-w-xs my-3" disabled required/>
+                        <input name='originalPrice' type="text" value={originalPrice} className="input input-bordered w-full min-w-xs my-3" disabled required/>
+                        <input name='resalePrice' type="text" value={resalePrice} className="input input-bordered w-full min-w-xs my-3" disabled required/>
+                        <input name='meetingLocation' type="text" placeholder="Meeting Location" className="input input-bordered w-full min-w-xs my-3"  required/>
+                        <input type="submit" className="input input-bordered w-full min-w-xs my-3 btn text-white bg-slate-900 border-none" value='SUBMIT' required/>
                     </form>
                 </div>
 

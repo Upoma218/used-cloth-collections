@@ -35,7 +35,7 @@ const ClientsReview = () => {
                 }
             </div>
             <div className='lg:px-80'>
-                <Link to="/addReview"><button className='btn btn-outline w-full mt-12 font-bold rounded-none'>Add Your Review</button></Link>
+                <Link to="/addReview"><button className='btn w-full mt-12 font-bold rounded-none'>Add Your Review</button></Link>
             </div>
         </div>
     );

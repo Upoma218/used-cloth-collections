@@ -11,7 +11,7 @@ const Blog = () => {
             <div className="divider"></div>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mt-24'>
                 <div className="card card-compact bg-white rounded-none">
-                    <figure><img src={blog1} alt="Dress" className='h-80 w-full' /></figure>
+                    <figure><img src={blog1} alt="Dress" className='h-80 w-full ease-in-out duration-500  hover:scale-125' /></figure>
                     <div className='flex justify-around items-center my-4'>
                         <div className='flex justify-between items-center'>
                             <FcBusinesswoman></FcBusinesswoman>
@@ -32,7 +32,7 @@ const Blog = () => {
                     </div>
                 </div>
                 <div className="card card-compact bg-white rounded-none">
-                    <figure><img src={blog2} alt="Dress" className='h-80 w-full' /></figure>
+                    <figure><img src={blog2} alt="Dress" className='h-80 w-full ease-in-out duration-500  hover:scale-125' /></figure>
                     <div className='flex justify-around items-center my-4'>
                         <div className='flex justify-between items-center'>
                             <FcBusinesswoman></FcBusinesswoman>

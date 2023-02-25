@@ -7,7 +7,7 @@ const About = () => {
         <div className="hero min-h-screen bg-white" data-aos="fade-up"
             data-aos-duration="3000">
             <div className="hero-content flex-col lg:flex-row">
-                <img src={about} className="lg:max-w-sm lg:w-1/2" alt='' />
+                <img src={about} className="lg:max-w-sm lg:w-1/2 ease-out-in duration-500  hover:scale-75" alt='' />
                 <div className='lg:w-1/2 lg:pl-32 text-center  lg:text-left'>
                     <h1 className="text-5xl ">About Us!</h1>
                     <div className="divider"></div>

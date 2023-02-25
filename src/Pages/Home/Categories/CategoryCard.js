@@ -42,7 +42,7 @@ const CategoryCard = ({ product }) => {
 
     return (
         <div className="card lg:card-side bg-white my-12 rounded-none" key={product._id} data-aos="zoom-in-left">
-            <figure><img src={image} alt="Album" className='w-full lg:w-96 h-80 lg:h-full' /></figure>
+            <figure><img src={image} alt="Album" className='w-full lg:w-96 h-80 lg:h-full ease-out-in duration-500  hover:scale-75' /></figure>
             <div className="card-body ml-12">
                 <h2 className="text-2xl mb-6 font-bold">Product Name :  {title}</h2>
                 <p className='font-bold '>Product Details : <span className='font-normal'>{details}</span></p>

@@ -18,18 +18,18 @@ const ShopNow = () => {
             </div>
             <div className='grid grid-cols-1 lg:grid-cols-4 gap-y-2 lg:gap-2'>
                 <div className='grid col-span-2 row-span-2' >
-                    <img src={img1} alt="" className='h-full w-full' />
+                    <figure><img src={img1} alt="" className='h-full w-full ease-in-out duration-500  hover:scale-75' /></figure>
                 </div>
                 <div className='grid col-span-4 lg:col-span-2 row-span-2 gap-y-2 lg:gap-2'>
                     <div className='grid col-span-2 row-span-1'>
-                        <img src={img2} alt="" className='h-full w-full' />
+                        <figure><img src={img2} alt="" className='h-full w-full ease-in-out duration-500  hover:scale-75' /></figure>
                     </div>
                     <div className='grid col-span-4 lg:col-span-2 grid-cols-1 lg:grid-cols-2 row-span-1 gap-y-2 lg:gap-2'>
                         <div className='grid col-span-1'>
-                            <img src={img3} alt="" className='h-full w-full' />
+                            <figure><img src={img3} alt="" className='h-full w-full ease-in-out duration-500  hover:scale-75' /></figure>
                         </div>
                         <div className='grid col-span-1'>
-                            <img src={img4} alt="" className='h-full w-full' />
+                            <figure><img src={img4} alt="" className='h-full w-full ease-in-out duration-500  hover:scale-75' /></figure>
                         </div>
                     </div>
                 </div>

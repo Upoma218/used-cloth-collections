@@ -60,21 +60,21 @@ const AddReview = () => {
                 <label>
                     <h1 className=''>Your Name</h1>
                 </label>
-                <input type="text" name='name' placeholder='Your Name' required className='input input-bordered w-full my-3 p-4 rounded-none' />
+                <input type="text" name='name' placeholder='Your Name' required className='input input-bordered w-full my-3 p-4 rounded-none'/>
             </div>
             <div>
                 <label>
                     <h1 className=''>Your Photo</h1>
                 </label>
-                <input type="file" name='image' placeholder='Your Photo' className='input input-bordered w-full my-3 p-4 rounded-none' />
+                <input type="file" name='image' placeholder='Your Photo' className='input input-bordered w-full my-3 p-4 rounded-none' required/>
             </div>
             <div>
                 <label>
                     <h1 className=''>Your Review</h1>
                 </label>
-                <input type="text" name='text' placeholder='Your Review' className='input input-bordered w-full my-3 p-4 rounded-none' />
+                <input type="text" name='text' placeholder='Your Review' className='input input-bordered w-full my-3 p-4 rounded-none' required/>
             </div>
-            <input type="submit" value="Add Review" className='btn text-white w-full my-5 rounded-none' />
+            <input type="submit" value="Add Review" className='btn text-white w-full my-5 rounded-none'required />
         </form>
     );
 };
