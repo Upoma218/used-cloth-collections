@@ -13,9 +13,9 @@ const AllProducts = () => {
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
-    const handleClick = () => {
-        setIsFlipped(!isFlipped);
-    }
+    // const handleClick = () => {
+    //     setIsFlipped(!isFlipped);
+    // }
     return (
         <div data-aos="fade-down"
             data-aos-easing="linear"
@@ -27,19 +27,17 @@ const AllProducts = () => {
                         {
                             products?.length &&
                             products.map(product =>
-                                <div className="card bg-white rounded-none" key={product._id} data-aos="flip-left"
+                                <div className="card bg-white rounded-none relative" key={product._id} data-aos="flip-left"
                                     data-aos-easing="ease-out-cubic"
                                     data-aos-duration="2000">
-                                    <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
                                         <div>
                                             <figure>
-                                                <img src={product?.image} alt="" className="h-72 w-full" onClick={handleClick} />
+                                                <img src={product?.image} alt="" className="h-72 w-full" />
 
                                             </figure>
-                                            <p className='text-center font-semibold my-6 cursor-pointer' onClick={handleClick} >View Details</p>
                                         </div>
-                                        <div className='w-full'>
-                                            <button onClick={handleClick}><div className="card-body rounded-none items-center text-center text-xs">
+                                        <div className='w-full'><div className="rounded-none items-center  text-xs card-body hover:w-full hover:h-full
+                                         absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white text-center py-4 opacity-0 transition-all duration-300 hover:opacity-100 hover:translate-y-0">
                                                 <h2 className="card-title">{product?.title}</h2>
                                                 <p className='font-bold '>Product Details : <span className='font-normal'>{product?.details}</span></p>
                                                 <p className='font-bold '>Times of Use : <span className='font-normal'>{product?.timesOfUse}</span></p>
@@ -57,10 +55,7 @@ const AllProducts = () => {
 
                                                 </div>
                                             </div>
-                                            </button>
                                         </div>
-
-                                    </ReactCardFlip>
 
 
                                 </div>)
