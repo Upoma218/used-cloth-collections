@@ -13,8 +13,6 @@ const AddReview = () => {
         const image = form.image.files[0];
         const name = form.name.value;
         const text = form.text.value;
-        const ratings = form.rating.value;
-        // console.log(image, name, text)
         const formData = new FormData();
         formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
@@ -29,7 +27,6 @@ const AddReview = () => {
                         name: name,
                         image: imgData.data.url,
                         text: text,
-                        ratings: ratings,
                     }
                     fetch('https://used-cloth-collections-server.vercel.app/reviews', {
                         method: 'POST',

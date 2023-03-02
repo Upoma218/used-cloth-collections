@@ -1,12 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { useState } from 'react';
-// import ReactCardFlip from 'react-card-flip';
 import { AuthContext } from '../../../Context/AuthProvider';
 import Loading from '../../Shared/Loading/Loading';
 
 const AdvertisedProducts = () => {
-    // const [isFlipped, setIsFlipped] = useState(false)
     const { user } = useContext(AuthContext);
     const { data: products = [], isLoading, refetch } = useQuery({
 
@@ -23,9 +20,6 @@ const AdvertisedProducts = () => {
 
         }
     })
-    // const handleClick = () => {
-    //     setIsFlipped(!isFlipped);
-    // }
 
     if (isLoading) {
         return <Loading></Loading>
@@ -46,9 +40,8 @@ const AdvertisedProducts = () => {
                                 <div className="card bg-white rounded-none relative" key={product._id} data-aos="flip-left"
                                     data-aos-easing="ease-out-cubic"
                                     data-aos-duration="2000">
-                                    {/* <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical"> */}
                                     <figure>
-                                        <img src={product.image} alt="" className="h-72 w-full object-fit : cover"/*  onClick={handleClick}  *//>
+                                        <img src={product.image} alt="" className="h-72 w-full object-fit : cover"/>
 
                                     </figure>
                                         <div className="card-body hover:w-full hover:h-full
@@ -61,8 +54,6 @@ const AdvertisedProducts = () => {
                                             <p className='font-bold '>Resale Price : <span className='font-normal'>{product.resalePrice}</span></p>
                                             <p className='font-bold '>Date of Post : <span className='font-normal'>{product.postedDate}</span></p>
                                         </div>
-
-                                    {/* </ReactCardFlip> */}
 
 
                                 </div>)

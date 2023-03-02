@@ -1,21 +1,17 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import ReactCardFlip from 'react-card-flip';
 import BookingModal from '../Shared/BookingModal/BookingModal';
 
 const AllProducts = () => {
     const [products, setProducts] = useState([]);
-    const [isFlipped, setIsFlipped] = useState(false)
     const [bookings, setBookings] = useState(null);
     useEffect(() => {
         fetch('https://used-cloth-collections-server.vercel.app/products')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
-    // const handleClick = () => {
-    //     setIsFlipped(!isFlipped);
-    // }
+    
     return (
         <div data-aos="fade-down"
             data-aos-easing="linear"
